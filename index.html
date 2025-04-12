@@ -1,0 +1,214 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EdTechX</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+    .table, .simulator {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #007acc;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+    .positive {
+      color: green;
+    }
+    .negative {
+      color: red;
+    }
+    select, button {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .result {
+      margin-top: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 1rem;
+      border: 2px solid #007acc;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      z-index: 1000;
+    }
+    .popup h3 {
+      margin-top: 0;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .info-icon {
+      margin-left: 0.5rem;
+      cursor: pointer;
+      color: #007acc;
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <h1>Standard Electrode Potentials</h1>
+  <div class="table">
+    <table id="electrodeTable">
+      <thead>
+        <tr>
+          <th>Half-Reaction</th>
+          <th>E° (V)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Redox Reaction Simulator</h2>
+  <div class="simulator">
+    <label for="oxidation">Choose Oxidation Half-Reaction:
+      <span class="info-icon" onclick="showPopup('Oxidation Half-Reaction', 'This is the half-reaction where a species loses electrons. It occurs at the anode.')">ℹ️</span>
+    </label>
+    <select id="oxidation"></select>
+
+    <label for="reduction">Choose Reduction Half-Reaction:
+      <span class="info-icon" onclick="showPopup('Reduction Half-Reaction', 'This is the half-reaction where a species gains electrons. It occurs at the cathode.')">ℹ️</span>
+    </label>
+    <select id="reduction"></select>
+
+    <button onclick="simulateReaction()">Simulate Reaction</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closePopup()"></div>
+  <div class="popup" id="popup">
+    <h3 id="popupTitle"></h3>
+    <p id="popupText"></p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <script>
+    const electrodeData = [
+      { reaction: "F₂ + 2e⁻ → 2F⁻", potential: 2.87, explanation: "Fluorine is the strongest oxidizing agent among halogens. It easily gains electrons." },
+      { reaction: "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O", potential: 1.51, explanation: "Permanganate ion in acidic solution is a powerful oxidizing agent." },
+      { reaction: "Cl₂ + 2e⁻ → 2Cl⁻", potential: 1.36, explanation: "Chlorine gas acts as a strong oxidizing agent by accepting electrons." },
+      { reaction: "O₂ + 4H⁺ + 4e⁻ → 2H₂O", potential: 1.23, explanation: "Oxygen in acidic medium gets reduced to water. It's a common cathode reaction." },
+      { reaction: "Br₂ + 2e⁻ → 2Br⁻", potential: 1.07, explanation: "Bromine is a halogen like chlorine but a weaker oxidizing agent." },
+      { reaction: "I₂ + 2e⁻ → 2I⁻", potential: 0.54, explanation: "Iodine is the weakest oxidizing agent among the halogens listed here." },
+      { reaction: "Ag⁺ + e⁻ → Ag", potential: 0.80, explanation: "Silver ions are easily reduced to metallic silver, often used in electroplating." },
+      { reaction: "Fe³⁺ + e⁻ → Fe²⁺", potential: 0.77, explanation: "Ferric ion is reduced to ferrous ion, common in redox titrations." },
+      { reaction: "Cu²⁺ + 2e⁻ → Cu", potential: 0.34, explanation: "Copper(II) ions are reduced to metallic copper in electrochemical cells." },
+      { reaction: "2H⁺ + 2e⁻ → H₂", potential: 0.00, explanation: "This is the standard hydrogen electrode, the reference point for all potentials." },
+      { reaction: "Pb²⁺ + 2e⁻ → Pb", potential: -0.13, explanation: "Lead ions are reduced to lead metal. It's less likely to gain electrons." },
+      { reaction: "Fe²⁺ + 2e⁻ → Fe", potential: -0.44, explanation: "Ferrous ions are reduced to iron metal, which readily oxidizes again." },
+      { reaction: "Zn²⁺ + 2e⁻ → Zn", potential: -0.76, explanation: "Zinc is commonly used as an anode in galvanic cells due to its reactivity." },
+      { reaction: "Cr³⁺ + 3e⁻ → Cr", potential: -0.74, explanation: "Chromium(III) is reduced to chromium metal." },
+      { reaction: "Al³⁺ + 3e⁻ → Al", potential: -1.66, explanation: "Aluminum ions are hard to reduce, requiring significant energy input." },
+      { reaction: "Mg²⁺ + 2e⁻ → Mg", potential: -2.37, explanation: "Magnesium is very reactive and acts as a strong reducing agent." },
+      { reaction: "Ca²⁺ + 2e⁻ → Ca", potential: -2.87, explanation: "Calcium is very reactive and not found in nature in pure form." },
+      { reaction: "Na⁺ + e⁻ → Na", potential: -2.71, explanation: "Sodium metal is highly reactive and rarely found in nature uncombined." },
+      { reaction: "K⁺ + e⁻ → K", potential: -2.93, explanation: "Potassium is even more reactive than sodium and lithium." },
+      { reaction: "Li⁺ + e⁻ → Li", potential: -3.04, explanation: "Lithium has the lowest standard electrode potential, very strong reducing agent." }
+    ];
+
+    const tbody = document.querySelector("#electrodeTable tbody");
+    const oxidationSelect = document.getElementById("oxidation");
+    const reductionSelect = document.getElementById("reduction");
+
+    electrodeData.forEach((entry, index) => {
+      const row = document.createElement("tr");
+      row.onclick = () => showPopup(entry.reaction, entry.explanation);
+
+      const reactionCell = document.createElement("td");
+      const potentialCell = document.createElement("td");
+
+      reactionCell.textContent = entry.reaction;
+      potentialCell.textContent = entry.potential.toFixed(2);
+      potentialCell.className = entry.potential >= 0 ? "positive" : "negative";
+
+      row.appendChild(reactionCell);
+      row.appendChild(potentialCell);
+      tbody.appendChild(row);
+
+      const option1 = document.createElement("option");
+      option1.value = entry.potential;
+      option1.textContent = entry.reaction;
+      oxidationSelect.appendChild(option1);
+
+      const option2 = document.createElement("option");
+      option2.value = entry.potential;
+      option2.textContent = entry.reaction;
+      reductionSelect.appendChild(option2);
+    });
+
+    function simulateReaction() {
+      const Eox = parseFloat(oxidationSelect.value);
+      const Ered = parseFloat(reductionSelect.value);
+      const Ecell = Ered - Eox;
+
+      const result = document.getElementById("result");
+      result.innerHTML = `E°cell = ${Ered.toFixed(2)} - (${Eox.toFixed(2)}) = <strong>${Ecell.toFixed(2)} V</strong><br>`;
+      result.innerHTML += Ecell > 0 ? "✅ Spontaneous reaction" : "❌ Non-spontaneous reaction";
+    }
+
+    function showPopup(title, text) {
+      document.getElementById("popupTitle").textContent = title;
+      document.getElementById("popupText").textContent = text;
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+
+
+</body></html>
