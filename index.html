@@ -134,27 +134,150 @@
   </div>
 
   <script>
-    const electrodeData = [
-      { reaction: "F₂ + 2e⁻ → 2F⁻", potential: 2.87, explanation: <p>"Fluorine is the strongest oxidizing agent among halogens because it easily gains electrons.</p><p><h2>Uses in Electrochemistry</h2></p><p>Production of Fluorine Gas: Fluorine gas is produced through the electrolysis of hydrofluoric acid (HF), where fluoride ions (F⁻) are oxidized at the anode to form fluorine gas (F₂).</p><p>Fluorination Reactions: Electrochemical fluorination is used in organic synthesis to introduce fluorine atoms into organic compounds, which is important in pharmaceuticals, agrochemicals, and the production of fluoropolymers like Teflon"</p> },
-      { reaction: "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O", potential: 1.51, explanation: "<p><h2>Uses in Electrochemistry</h2></p><p>xidizing Agent: MnO₄⁻ acts as a strong oxidizing agent in electrochemical reactions, often in redox processes where it is reduced to Mn²⁺ or MnO₂. It’s widely used in electrochemical sensors for detecting reducing agents.</p><p>Electrolytic Deposition: MnO₄⁻ can be used in the electroplating of manganese or in electrochemical synthesis of manganese-based materials, such as in batteries or catalytic applications.</p>" },
-      { reaction: "Cl₂ + 2e⁻ → 2Cl⁻", potential: 1.36, explanation: "<p>Uses in Electrochemistry:</p><p>Chlor-alkali Process: Chlorine is produced by the electrolysis of brine in the chlor-alkali process, which also produces sodium hydroxide and hydrogen gas.</p><p>Water Disinfection: Chlorine is used in electrochemical disinfection processes, such as in water treatment plants to kill bacteria.</p>" },
-      { reaction: "O₂ + 4H⁺ + 4e⁻ → 2H₂O", potential: 1.23, explanation: "<p><h2>Uses in Electrochemistry</h2></p><p>Oxygen Reduction Reaction (ORR): In fuel cells, especially hydrogen fuel cells, O₂ is reduced at the cathode to form water (H₂O) by gaining electrons. This reaction is central to the generation of electricity in fuel cells.</p><p>Electrolysis of Water: O₂ is produced during the electrolysis of water, where water is split into hydrogen and oxygen gases. Oxygen is released at the anode in this process, which is key in hydrogen production for energy storage and fuel applications</p>." },
-      { reaction: "Br₂ + 2e⁻ → 2Br⁻", potential: 1.07, explanation: "Bromine is a halogen like chlorine but a weaker oxidizing agent.<p><h2>Uses in Electrochemistry</h2></p><p>Bromine Production: Bromine gas (Br₂) is produced by the electrolysis of sodium bromide (NaBr) or other bromine-containing salts, where bromide ions (Br⁻) are oxidized at the anode to form bromine gas.</p><p>Electrochemical Synthesis: Bromine is used in electrochemical processes for organic synthesis, particularly in the bromination of organic compounds. It also finds use in bromine-based batteries (e.g., bromine flow batteries) for energy storage</p>" },
-      { reaction: "I₂ + 2e⁻ → 2I⁻", potential: 0.54, explanation: "Iodine is the weakest oxidizing agent among the halogens listed here.<h2>Uses in Electrochemistry</h2></p>pIodine Production: Iodine gas (I₂) is produced by the electrolysis of potassium iodide (KI) or other iodine-containing salts, where iodide ions (I⁻) are oxidized at the anode to form iodine gas.</p><p>Electrochemical Synthesis: Iodine is used in the electrochemical synthesis of iodine-based compounds, and also in iodine-based batteries like iodine-sulfur batteries for energy storage, leveraging iodine's redox properties.</p>" },
-      { reaction: "Ag⁺ + e⁻ → Ag", potential: 0.80, explanation: "<h2><p>Uses in Electrochemistry:</p><h2><p>Electroplating: Silver is used in electroplating for high-quality coatings, often in jewelry, silverware, and electronics.</p><p>Photographic Processes: In traditional photography, silver halides are used in silver-based electrochemical reactions to develop images.</p>" },
-      { reaction: "Fe³⁺ + e⁻ → Fe²⁺", potential: 0.77, explanation: "Ferric ion is reduced to ferrous ion, common in redox titrations.<p>Uses in Electrochemistry:</p><p>Corrosion: Iron is used in electrochemical studies of corrosion, specifically the oxidation of iron in the presence of oxygen and water.</p><p>Batteries: Iron is used in some iron-air batteries, where iron is oxidized and reduced during the charge/discharge cycle.</p>" },
-      { reaction: "Cu²⁺ + 2e⁻ → Cu", potential: 0.34, explanation: "<h3><p>Uses in Electrochemistry:</p><h3><p>Electroplating: Copper is widely used in electroplating to deposit a layer of copper onto another metal, often for electronics and jewelry.</p>"<p>Electrorefining: Copper is refined using electrolysis, where impure copper is the anode and pure copper is deposited at the cathode.</p>
-      { reaction: "2H++2e−→H2​ (E°=0.00V)", potential: 0.00, explanation: "It is the Standard Reference Electrode.The Standard Hydrogen Electrode (SHE) is a reference electrode in electrochemistry, arbitrarily assigned a potential of 0.00 volts, and used to measure the electrode potentials of other half-cells.It is also used as a fuel in hydrogen fuel cells, where it reacts with oxygen to produce electricity, water, and heat." },
-      { reaction: "Pb²⁺ + 2e⁻ → Pb", potential: -0.13, explanation: "Lead ions are reduced to lead metal. It's less likely to gain electrons.<p><h2>Uses in Electrochemistry</h2></p><p>Lead-Acid Batteries: Pb²⁺ ions are involved in the charge and discharge reactions of lead-acid batteries. During discharge, lead (Pb) reacts with sulfuric acid (H₂SO₄) to form lead sulfate (PbSO₄) and release electrical energy. During charging, lead sulfate is converted back to lead and lead dioxide (PbO₂), and Pb²⁺ ions are involved in these redox reactions.</p><p>Electrorefining: Pb²⁺ ions are used in the electrorefining of lead, where impure lead is electrolytically refined to produce high-purity lead metal.</p>" },
-      { reaction: "Fe²⁺ + 2e⁻ → Fe", potential: -0.44, explanation: "Fe²⁺ is valuable due to its ability to undergo oxidation and reduction, making it useful in energy storage and metal coating processes.<p><h2>Uses in Electrochemistry</h2></p><p>Electroplating: Fe²⁺ is used in iron electroplating, where it is reduced to form a layer of iron on a substrate. This process is used to improve the corrosion resistance and durability of metal parts.</p><p>Redox Reactions in Batteries: Fe²⁺ is involved in redox reactions in some types of batteries (e.g., iron-air batteries), where it alternates between Fe²⁺ and Fe³⁺ (iron(III)) during the charge and discharge cycles to store and release energy"</p> },
-      { reaction: "Zn²⁺ + 2e⁻ → Zn", potential: -0.76, explanation: "<p>Uses in Electrochemistry:</p> <p>Galvanic Cells: Zinc is used as the anode in galvanic cells (e.g., Zn-Cu battery) due to its ability to easily lose electrons (oxidation).</p><p>Corrosion Protection: Zinc is used in galvanization to coat iron or steel, providing corrosion resistance.</p>
-      { reaction: "Cr³⁺ + 3e⁻ → Cr", potential: -0.74, explanation: "<p>Uses in Electrochemistry:</p><p>Chromium Electroplating: Cr³⁺ is used in chromium electroplating, where it is reduced to form a chromium metal coating on surfaces, providing hardness, corrosion resistance, and an attractive finish.</p><p>Electrochemical Synthesis: Cr³⁺ is used in electrochemical synthesis to produce chromium compounds, which are important in the manufacturing of pigments, dyes, and materials with specific electrochemical properties</p>." },
-      { reaction: "Al³⁺ + 3e⁻ → Al", potential: -1.66, explanation: "<p>Uses in Electrochemistry:</p><p>Aluminum Production: Al³⁺ is involved in the Hall-Héroult process for producing aluminum metal. In this process, Al³⁺ ions from aluminum oxide (Al₂O₃) are reduced at the cathode during electrolysis to form aluminum metal.</p><p>Aluminum-Air Batteries: Al³⁺ ions play a role in aluminum-air batteries, where aluminum metal undergoes oxidation to release energy, offering a high energy density for potential use in electric vehicles and other applications.</p>" },
-      { reaction: "Mg²⁺ + 2e⁻ → Mg", potential: -2.37, explanation: "Magnesium is very reactive and acts as a strong reducing agent.<p>Uses in Electrochemistry:</p><p>Magnesium-Ion Batteries: Mg²⁺ ions are fundamental to the operation of magnesium-ion batteries, which are being developed as potential alternatives to lithium-ion batteries. These batteries utilize the reversible intercalation and deintercalation of Mg²⁺ ions between electrodes to store and release energy.</p>" },
-      { reaction: "Ca²⁺ + 2e⁻ → Ca", potential: -2.87, explanation: "Calcium is very reactive and not found in nature in pure form.<p>Uses in Electrochemistry:</p><p>Electroplating;Calcium chloride is used in electroplating to modify surface properties of metals" },
-      { reaction: "Na⁺ + e⁻ → Na", potential: -2.71, explanation: "Sodium metal is highly reactive and rarely found in nature uncombined.<p>Uses in Electrochemistry:</p>Salt bridges;Na+ ions are used in the saltbridge which helps mantain electrical neutrality and balancing charges  between the half-cells" },
-      { reaction: "K⁺ + e⁻ → K", potential: -2.93, explanation: "<p>Uses in Electrochemistry:</p><p>Used in making Salt bridges where it maintain ionic balance between halfcells." },
-      { reaction: "Li⁺ + e⁻ → Li", potential: -3.04, explanation: "Lithium has the lowest standard electrode potential, very strong reducing agent.<p>Uses in Electrochemistry:</p><p>Lithium-Ion Batteries: Lithium is the core material used in lithium-ion batteries, which are widely used in mobile phones, laptops, and electric vehicles.</p><p>Electroplating: Lithium is used in electroplating for producing thin films and coatings, particularly in high-performance applications.</p>" }
+      const electrodeData = [
+  {
+    reaction: "F₂ + 2e⁻ → 2F⁻",
+    potential: 2.87,
+    explanation: "Fluorine is the ultimate electron grabber, making it the strongest oxidizing agent among the halogens. It eagerly snatches electrons, leaving a trail of highly reactive fluoride ions in its wake. This makes fluorine an absolute powerhouse in chemistry!",
+    uses: [
+      "Fluorine plays a starring role in the creation of Teflon, the non-stick coating that revolutionized cooking.",
+      "In the nuclear industry, fluorine helps create uranium hexafluoride, which is crucial for enriching uranium for nuclear power."
+    ]
+  },
+  {
+    reaction: "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+    potential: 1.51,
+    explanation: "The mighty permanganate ion is a formidable oxidizer, especially in acidic solutions. With its deep purple hue, it's like the superhero of redox reactions, effortlessly transforming into a less powerful Mn²⁺ ion while leaving behind a trail of water molecules.",
+    uses: [
+      "Potassium permanganate is a hero in water treatment, used to remove contaminants and disinfect water.",
+      "It also shines as an oxidizing agent in organic chemistry, helping synthesize complex compounds."
+    ]
+  },
+  {
+    reaction: "Cl₂ + 2e⁻ → 2Cl⁻",
+    potential: 1.36,
+    explanation: "Chlorine gas is a strong electron thief, ripping electrons away from other molecules with ease. It’s like the villain in the halogen family, always looking for a chance to steal electrons and turn into chloride ions.",
+    uses: [
+      "Chlorine is indispensable in disinfectants and bleach, keeping our water clean and our homes germ-free.",
+      "In the industrial world, chlorine is crucial in making PVC, the plastic that’s used in everything from pipes to clothing."
+    ]
+  },
+  {
+    reaction: "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+    potential: 1.23,
+    explanation: "Oxygen is the lifeblood of aerobic organisms, accepting electrons and turning into water in a reaction that powers everything from respiration to combustion. This iconic process is the heart of energy generation in electrochemical cells.",
+    uses: [
+      "Oxygen is vital for respiration in humans and animals, sustaining life itself.",
+      "In industry, oxygen is essential for cutting and welding metals, thanks to its ability to support high-temperature flames."
+    ]
+  },
+  {
+    reaction: "Br₂ + 2e⁻ → 2Br⁻",
+    potential: 1.07,
+    explanation: "Bromine, the cool and collected halogen, is a strong oxidizer but just a bit less aggressive than its chlorine cousin. When it accepts electrons, it transforms into bromide, ready to join the ranks of the halogens in its ionic form.",
+    uses: [
+      "Bromine is used in flame retardants, making materials safer by reducing their flammability.",
+      "It also plays a role in medicine, used in certain sedatives and antiseptics."
+    ]
+  },
+  {
+    reaction: "I₂ + 2e⁻ → 2I⁻",
+    potential: 0.54,
+    explanation: "Iodine is the least aggressive of the halogens, but that doesn’t mean it’s any less valuable. As it gains electrons, it transforms from a molecular iodine gas into iodide ions, bringing essential balance to chemical reactions.",
+    uses: [
+      "Iodine is a crucial element in medical antiseptics, helping to kill harmful bacteria.",
+      "It’s also used in X-ray imaging as a contrast agent, allowing doctors to better visualize internal structures."
+    ]
+  },
+  {
+    reaction: "Ag⁺ + e⁻ → Ag",
+    potential: 0.80,
+    explanation: "Silver ions are ready to be reduced to shiny, metallic silver, making it a go-to material for electroplating. Silver’s lustrous finish is both beautiful and highly conductive, making it perfect for a variety of applications.",
+    uses: [
+      "Silver is widely used in jewelry and coins, prized for its aesthetic appeal and conductivity.",
+      "In electronics, silver is used in connectors and switches due to its superior electrical conductivity."
+    ]
+  },
+  {
+    reaction: "Fe³⁺ + e⁻ → Fe²⁺",
+    potential: 0.77,
+    explanation: "Iron’s transition from ferric (Fe³⁺) to ferrous (Fe²⁺) is a key step in redox chemistry, especially in titrations. It’s the metal that’s always ready to interact, making it a cornerstone of electrochemical processes.",
+    uses: [
+      "Iron is a fundamental material in construction, especially in the production of steel.",
+      "Iron also plays a key role in the environment, being an essential nutrient in many biological processes."
+    ]
+  },
+  {
+    reaction: "Cu²⁺ + 2e⁻ → Cu",
+    potential: 0.34,
+    explanation: "Copper ions readily accept electrons to form metallic copper, making copper one of the most commonly used metals in electrochemical cells. It’s the metal that keeps on giving, from conductivity to corrosion resistance.",
+    uses: [
+      "Copper is used in electrical wiring and circuits due to its excellent conductivity.",
+      "It’s also used in plumbing, as copper pipes are resistant to corrosion and are long-lasting."
+    ]
+  },
+  {
+    reaction: "2H⁺ + 2e⁻ → H₂",
+    potential: 0.00,
+    explanation: "The standard hydrogen electrode is the reference point for all electrochemical reactions. It's the universal baseline, where hydrogen ions gain electrons to form hydrogen gas, making it an essential part of electrochemical theory.",
+    uses: [
+      "Hydrogen gas is used in fuel cells to produce electricity in a clean, efficient way.",
+      "It is also a key ingredient in the Haber process for ammonia synthesis, crucial for fertilizers."
+    ]
+  },
+  {
+    reaction: "Pb²⁺ + 2e⁻ → Pb",
+    potential: -0.13,
+    explanation: "Lead, with its ability to be reduced to metallic form, is less eager to accept electrons compared to other metals. But when it does, it’s often used in applications that require heavy-duty corrosion resistance, like batteries.",
+    uses: [
+      "Lead is a primary component in lead-acid batteries, commonly used in cars.",
+      "It’s also used in shielding for radiation, protecting us from harmful ionizing radiation."
+    ]
+  },
+  {
+    reaction: "Fe²⁺ + 2e⁻ → Fe",
+    potential: -0.44,
+    explanation: "Ferrous iron is easily reduced to its metallic form, but it has a tendency to oxidize again. This makes it a great participant in redox reactions, but one that requires careful control.",
+    uses: [
+      "Iron is indispensable in construction, especially in the form of steel for buildings and bridges.",
+      "Ferrous ions are also used in wastewater treatment to precipitate out harmful phosphates."
+    ]
+  },
+  {
+    reaction: "Zn²⁺ + 2e⁻ → Zn",
+    potential: -0.76,
+    explanation: "Zinc is highly reactive and ready to give up its electrons, making it ideal for use as an anode in galvanic cells. It’s the workhorse of electrochemistry, driving important reactions across industries.",
+    uses: [
+      "Zinc is used to galvanize steel, providing corrosion resistance to structures like bridges and buildings.",
+      "Zinc is a key component of batteries, including zinc-carbon and alkaline types."
+    ]
+  },
+  {
+    reaction: "Cr³⁺ + 3e⁻ → Cr",
+    potential: -0.74,
+    explanation: "Chromium takes electrons to transform into its metallic state, often used for its durability and resistance to corrosion. It’s like the shield in the world of electrochemistry, offering protection and strength.",
+    uses: [
+      "Chromium is used in the production of stainless steel, making it resistant to rust and corrosion.",
+      "Chromium compounds are also used in pigments, like chromium oxide, which gives a green color."
+    ]
+  },
+  {
+    reaction: "Al³⁺ + 3e⁻ → Al",
+    potential: -1.66,
+    explanation: "Aluminum is tough to reduce, requiring a significant amount of energy, but once it's reduced, it becomes one of the lightest and most versatile metals. Its high resistance to corrosion makes it ideal for many applications.",
+    uses: [
+      "Aluminum is used extensively in the aerospace and transportation industries due to its light weight and strength.",
+      "It is also widely used in packaging, especially as aluminum foil and cans."
+    ]
+  },
+  {
+    reaction: "Mg²⁺ + 2e⁻ → Mg",
+    potential: -2.37,
+    explanation: "Magnesium is highly reactive, readily donating electrons to become metallic magnesium. It’s a powerful reducing agent and a vital part of many industrial processes.",
+    uses: [
+      "Magnesium is used in lightweight alloys for automotive and aerospace industries.",
+      "It’s also used in fireworks to
+
     ];
 
     const tbody = document.querySelector("#electrodeTable tbody");
@@ -208,6 +331,7 @@
       document.getElementById("popup").style.display = "none";
       document.getElementById("overlay").style.display = "none";
     }
+
   </script>
 
 
